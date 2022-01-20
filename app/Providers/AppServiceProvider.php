@@ -59,7 +59,7 @@ class AppServiceProvider extends ServiceProvider
         $this->dumpSqlLog();
 
         // 同步数据库配置
-        if (Schema::hasTable((new Config())->getTable())) {
+        if (!$this->app->runningInConsole() && Schema::hasTable((new Config())->getTable())) {
             $configs = Config::all();
             foreach ($configs as $config) {
                 if ($config->config_file_key === '') {
