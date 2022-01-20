@@ -29,7 +29,11 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        $schedule->command('backup:run --only-db')->dailyAt('01:00');
+        // 备份数据库
+//        $schedule->command('backup:run --only-db')->dailyAt('01:00');
+
+        // 每日重置数据库
+        $schedule->command('migrate:refresh --seed --force')->dailyAt('01:00');
     }
 
     /**
