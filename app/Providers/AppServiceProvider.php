@@ -9,6 +9,7 @@ use App\Http\Validators\PhoneValidator;
 use App\Http\Validators\UsernameValidator;
 use App\Models\Config;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\ServiceProvider;
@@ -59,7 +60,10 @@ class AppServiceProvider extends ServiceProvider
         $this->dumpSqlLog();
 
         // 同步数据库配置
-        if (!$this->app->runningInConsole() && Schema::hasTable((new Config())->getTable())) {
+        if (!$this->app->runningInConsole()
+            && File::exists(storage_path('app/install.lock'))
+            && Schema::hasTable((new Config())->getTable())
+        ) {
             $configs = Config::all();
             foreach ($configs as $config) {
                 if ($config->config_file_key === '') {
