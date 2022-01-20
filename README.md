@@ -1,4 +1,10 @@
-# pear-admin-laravel-mine
+## shayvmo-admin
+
+#### 仓库地址
+
+gitee: [https://gitee.com/shayvmo/shayvmo-admin](https://gitee.com/shayvmo/shayvmo-admin)
+
+github: [https://github.com/shayvmo/shayvmo-admin](https://github.com/shayvmo/shayvmo-admin)
 
 #### 介绍
 基于laravel6.x的后台基础管理系统，采用MVC方式搭建。
