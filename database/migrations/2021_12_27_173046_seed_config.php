@@ -15,7 +15,7 @@ class SeedConfig extends Migration
                 'sort' => 9,
                 'children' => [
                     [
-                        'label' => '小程序APPID',
+                        'label' => 'appid',
                         'key' => 'wechat_miniprogram_appid',
                         'config_file_key' => 'wechat.mini_program.default.app_id',
                         'val' => '',
@@ -23,7 +23,7 @@ class SeedConfig extends Migration
                         'tips' => '小程序APPID',
                     ],
                     [
-                        'label' => '小程序secret',
+                        'label' => 'secret',
                         'key' => 'wechat_miniprogram_secret',
                         'config_file_key' => 'wechat.mini_program.default.secret',
                         'val' => '',
@@ -31,7 +31,7 @@ class SeedConfig extends Migration
                         'tips' => '小程序secret',
                     ],
                     [
-                        'label' => '小程序token',
+                        'label' => 'token',
                         'key' => 'wechat_miniprogram_token',
                         'config_file_key' => 'wechat.mini_program.default.token',
                         'val' => '',
@@ -39,12 +39,12 @@ class SeedConfig extends Migration
                         'tips' => '小程序token(非必填)',
                     ],
                     [
-                        'label' => '小程序aes_key',
+                        'label' => 'aes_key',
                         'key' => 'wechat_miniprogram_aes_key',
                         'config_file_key' => 'wechat.mini_program.default.aes_key',
                         'val' => '',
                         'type' => 3,
-                        'tips' => '小程序aes_key',
+                        'tips' => '小程序aes_key(非必填)',
                     ],
                 ],
             ],
