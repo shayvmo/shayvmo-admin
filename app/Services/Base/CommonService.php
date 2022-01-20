@@ -5,22 +5,20 @@ namespace App\Services\Base;
 
 
 use App\Exceptions\ValidateException;
-use App\Models\Config;
 use App\Models\RequestLog;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Validator;
 
 class CommonService
 {
     /**
      * 校验
-     * @param array $params
-     * @param array $rules
+     * @param array $params 待校验参数
+     * @param array $rules 规则
+     * @param array $message 提示消息
      * @return bool
      * @throws ValidateException
      */
-    public static function validate(array $params, array $rules): bool
+    public static function validate(array $params, array $rules, array $message = []): bool
     {
         $rules_demo = [
             'username' => [
@@ -31,7 +29,10 @@ class CommonService
                 'unique:admins,username',
             ],
         ];
-        $validator = Validator::make($params, $rules);
+        $message_demo = [
+            'username.required' => '用户名必填'
+        ];
+        $validator = Validator::make($params, $rules, $message);
         if ($validator->fails()) {
             throw new ValidateException($validator->errors()->first());
         }

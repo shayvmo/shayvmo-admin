@@ -7,15 +7,12 @@ use App\Exceptions\ServiceException;
 use App\Http\Requests\Backend\RoleListRequest;
 use App\Http\Requests\Backend\RolePermissionsPostRequest;
 use App\Http\Requests\Backend\RolePostRequest;
-use App\Http\Requests\RoleCreateRequest;
-use App\Http\Requests\RoleUpdateRequest;
 use App\Models\Permission;
 use App\Models\Role;
 use App\Services\Base\CommonService;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Response;
 
 class RoleController extends Controller
 {
@@ -58,7 +55,7 @@ class RoleController extends Controller
                 'unique:roles,name',
             ],
         ];
-        CommonService::validate($params, $rules);
+        CommonService::validate($params, $rules, ['name.unique' => '角色标识已存在']);
         $params['desc'] = $params['desc'] ?? '';
         $role = Role::query()->create($params);
         return $this->successData($role->toArray());
@@ -76,7 +73,7 @@ class RoleController extends Controller
                     'unique:roles,name',
                 ],
             ];
-            CommonService::validate($params, $rules);
+            CommonService::validate($params, $rules, ['name.unique' => '角色标识已存在']);
         }
         $params['desc'] = $params['desc'] ?? '';
         $role->fill($params)->save();

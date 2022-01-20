@@ -13,7 +13,6 @@ class RolePostRequest extends BaseRequest
             'name'=>[
                 'required',
                 'string',
-                'alpha_num',
                 'chinese',
                 'max:50',
             ],
@@ -28,6 +27,13 @@ class RolePostRequest extends BaseRequest
                 'max:80',
                 'nullable'
             ],
+        ];
+    }
+
+    public function attributes()
+    {
+        return [
+            'name' => '角色标识'
         ];
     }
 
