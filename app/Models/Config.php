@@ -11,7 +11,8 @@ use Illuminate\Database\Eloquent\Model;
  * @property string $key  配置项字段
  * @property string $config_file_key  系统配置文件对应key值
  * @property string $val  配置项值
- * @property int $type  1 radio 2 text 3 textarea
+ * @property int $type  1 radio 2 text 3 textarea 4 radio
+ * @property string $options  选项值
  * @property string $tips  输入提示
  * @property int $sort  排序
  * @property \Carbon\Carbon $created_at
@@ -19,6 +20,10 @@ use Illuminate\Database\Eloquent\Model;
  */
 class Config extends Model
 {
+    protected $casts = [
+        'options' => 'array',
+    ];
+
     /**
      * @var array
      */
@@ -29,6 +34,7 @@ class Config extends Model
         'config_file_key',
         'val',
         'type',
+        'options',
         'tips',
         'sort',
     ];
@@ -37,6 +43,7 @@ class Config extends Model
         1 => 'switch',
         2 => 'text',
         3 => 'textarea',
+        4 => 'radio',
     ];
 
     public function getTypeAttribute($value)

@@ -22,7 +22,8 @@ class CreateConfigsTable extends Migration
             $table->string('key', 30)->nullable(false)->comment('配置项字段');
             $table->string('config_file_key', 50)->default('')->comment('系统配置文件对应key值');
             $table->string('val', 150)->nullable(false)->comment('配置项值');
-            $table->unsignedTinyInteger('type')->default(0)->comment('1 switch 2 text 3 textarea');
+            $table->unsignedTinyInteger('type')->default(0)->comment('1 switch 2 text 3 textarea 4 radio');
+            $table->string('options', 1000)->default('')->comment('选项值');
             $table->string('tips', 150)->default('')->comment('输入提示');
             $table->unsignedTinyInteger('sort')->default(100)->comment('排序');
             $table->dateTime('created_at')->nullable();

@@ -34,7 +34,7 @@ return [
          * 默认 public 本地,对应 storage 里面的配置即可
          * 优先选择云存储，其次本地存储
          */
-        'storage' => env('FILESYSTEM_CLOUD') ?: env('FILESYSTEM_DRIVER', 'public'),
+        'storage' => env('FILESYSTEM_DRIVER', 'public'),
 
         /*
          * 默认文件或文件组名称

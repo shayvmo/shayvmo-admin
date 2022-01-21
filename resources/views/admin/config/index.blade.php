@@ -28,6 +28,9 @@
                                     <el-radio :label="1">是</el-radio>
                                     <el-radio :label="0">否</el-radio>
                                 </el-radio-group>
+                                <el-radio-group v-if="config.type === 'radio'" v-model="config.val">
+                                    <el-radio v-for="option in config.options" :label="option.value">@{{  option.label }}</el-radio>
+                                </el-radio-group>
                                 <span class="tips">@{{ config.tips }}</span>
                             </el-form-item>
                             <el-form-item>
