@@ -29,15 +29,6 @@ class ArticleController extends Controller
         $data = $request->post();
         $markdownParser = new ParsedownExtra();
         $html = $markdownParser->setBreaksEnabled(true)->text($data['markdown']);
-        Article::create([
-            'title' => '欢迎来到我的博客',
-            'cover_img' => 'http://oss.shayvmo.cn/blog/upload/6d86cdc9b338679bce51a944bc3c716066.jpg',
-            'author' => '沙屿沫',
-            'markdown' => $data['markdown'],
-            'content' => $html,
-            'article_url' => '',
-            'status' => 0,
-        ]);
         return $this->successData($data);
     }
 }

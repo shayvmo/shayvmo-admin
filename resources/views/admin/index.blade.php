@@ -11,6 +11,35 @@
         <el-card class="box-card">
             【 @{{ nowTime }} 】 生活就像海洋，只有意志坚强的人才能到达彼岸。
         </el-card>
+        <el-row :gutter="20" class="margin-top-bottom-10">
+            <el-col :span="12">
+                <el-card class="box-card">
+                    <div slot="header" class="clearfix">
+                        <span>更新动态</span>
+                    </div>
+                    <el-timeline>
+                        <el-timeline-item timestamp="2022-01-25" placement="top">
+                            <el-card>
+                                <h4>仪表盘更新, 添加更新日志以及仓库地址</h4>
+                            </el-card>
+                        </el-timeline-item>
+                    </el-timeline>
+                </el-card>
+            </el-col>
+            <el-col :span="12">
+                <el-card class="box-card">
+                    <div slot="header" class="clearfix">
+                        <span>链接</span>
+                    </div>
+                    <el-row>
+                        <el-link href="https://gitee.com/shayvmo/shayvmo-admin" target="_blank">Gitee 仓库：https://gitee.com/shayvmo/shayvmo-admin</el-link>
+                    </el-row>
+                    <el-row>
+                        <el-link href="https://github.com/shayvmo/shayvmo-admin" target="_blank">Github 仓库： https://github.com/shayvmo/shayvmo-admin</el-link>
+                    </el-row>
+                </el-card>
+            </el-col>
+        </el-row>
     </div>
 @endsection
 
