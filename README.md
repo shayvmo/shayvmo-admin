@@ -83,6 +83,11 @@ php artisan backup:clean
 * * * * * cd /your-project-path && php artisan schedule:run >> /dev/null 2>&1
 ```
 
+8、刷新超级管理员权限
+```
+php artisan rsap
+```
+
 #### 使用说明
 
 暂无
