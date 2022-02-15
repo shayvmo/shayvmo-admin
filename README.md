@@ -89,6 +89,13 @@ php artisan backup:clean
 
 #### 规划功能
 
+2022年2月15日
+- [ ] !!!重写版本
+    - [ ] 权限放到数组文件
+    - [ ] 配置项抽离到数据库表json
+    - [ ] 富文本
+  
+延后：
 - [ ] 上传设置优化，上传方式：本地，七牛云，阿里云
 - [ ] 引入[spatie/laravel-activitylog](https://spatie.be/docs/laravel-activitylog/v4/introduction)
 
