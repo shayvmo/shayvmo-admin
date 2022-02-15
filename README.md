@@ -131,12 +131,7 @@ php artisan backup:clean
 
 #### 交流
 
-QQ群： 634619533
-
-微信群：
-
-![qrcode.png](qrcode.png)
-
+提个Issue吧
 
 #### 其他
 
