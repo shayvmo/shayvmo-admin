@@ -31,7 +31,7 @@
 					<li class="layui-nav-item">
 						<!-- 头 像 -->
 						<a href="javascript:;">
-							<img src="{{ Avatar::create($guard->username)->toBase64() }}" class="layui-nav-img" alt="{{$guard->nickname ?? $guard->username}}" title="{{$guard->nickname ?? $guard->username}}">
+							<img src="/img/default.jpg" class="layui-nav-img" alt="{{$guard->nickname ?? $guard->username}}" title="{{$guard->nickname ?? $guard->username}}">
 						</a>
                         <!-- 功 能 菜 单 -->
 						<dl class="layui-nav-child">
