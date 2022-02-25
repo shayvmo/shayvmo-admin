@@ -18,6 +18,11 @@
                         <span>更新动态</span>
                     </div>
                     <el-timeline>
+                        <el-timeline-item timestamp="2022-02-25" placement="top">
+                            <el-card>
+                                <h4>删除生成头像composer包；去掉消息组件等</h4>
+                            </el-card>
+                        </el-timeline-item>
                         <el-timeline-item timestamp="2022-01-25" placement="top">
                             <el-card>
                                 <h4>仪表盘更新, 添加更新日志以及仓库地址</h4>

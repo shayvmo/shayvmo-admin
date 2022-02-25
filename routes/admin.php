@@ -50,10 +50,6 @@ Route::group(['middleware' => ['check.install']], function() {
     Route::group(['namespace' => 'Admin', 'prefix' => 'admin', 'middleware' => ['auth']], function () {
         //控制中心
         Route::get('datacenter', 'BasicController@dateCenter')->name('admin.datacenter');// 未完成
-        Route::get('message/panel', '\App\Http\Controllers\MessagesController@panel')->name('admin.message.panel');// 登录后获取消息api
-        Route::get('message', '\App\Http\Controllers\MessagesController@index')->name('admin.message');// 未完成
-        Route::get('message/data', '\App\Http\Controllers\MessagesController@data')->name('admin.message.data');// 未完成
-        Route::get('message/read/{id}', '\App\Http\Controllers\MessagesController@read')->name('admin.message.read');// 阅读通知详情页
     });
 
     /*

@@ -26,8 +26,7 @@
 				<ul class="layui-nav layui-layout-right">
                     <li class="layui-nav-item layui-hide-xs"><a href="javascript:void(0);" class="layui-icon layui-icon-fonts-clear" id="clearcahe" title="清除缓存"></a></li>
 					<li class="layui-nav-item layui-hide-xs"><a href="#" class="fullScreen layui-icon layui-icon-screen-full"></a></li>
-{{--					<li class="layui-nav-item layui-hide-xs"><a href="{{route('admin.index')}}" class="layui-icon layui-icon-website"></a></li>--}}
-					<li class="layui-nav-item layui-hide-xs message"></li>
+{{--					<li class="layui-nav-item layui-hide-xs"><a href="{{route('admin.index')}}" target="_blank" class="layui-icon layui-icon-website"></a></li>--}}
 					<li class="layui-nav-item">
 						<!-- 头 像 -->
 						<a href="javascript:;">
@@ -83,7 +82,6 @@
 			layui.use(['admin','jquery','convert','popup','notice', 'layer'], function() {
                 const admin = layui.admin;
                 const $ = layui.jquery;
-                const convert = layui.convert;
                 const popup = layui.popup;
                 const notice = layui.notice;
                 const layer = layui.layer;
@@ -99,9 +97,6 @@
                         location.href = "{{route('admin.logout')}}";
                     })
                 })
-
-                // 初始化消息回调
-                // admin.message();
 
                 // 重写消息回调 [消息列表点击事件]
                 admin.message(function(id, title, context, form) {
