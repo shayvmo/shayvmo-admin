@@ -84,7 +84,6 @@
                 const $ = layui.jquery;
                 const popup = layui.popup;
                 const notice = layui.notice;
-                const layer = layui.layer;
 
                 admin.setConfigType("yml");
                 admin.setConfigPath("{{asset(BE_CONFIG.'/pear.config.yml')}}");
@@ -97,21 +96,6 @@
                         location.href = "{{route('admin.logout')}}";
                     })
                 })
-
-                // 重写消息回调 [消息列表点击事件]
-                admin.message(function(id, title, context, form) {
-                    // console.log(id, title, context, form)
-                    layer.open({
-                        type: 2,
-                        title: '消息详情',
-                        shade: 0.1,
-                        area: ['800px', '680px'],
-                        content: '/admin/message/read/' + id,
-                        end: function () {
-                            $("div[notice-id='" + id + "']").remove()
-                        }
-                    })
-                });
 
                 $("#clearcahe").click(function () {
                     $.get("/clear-cache",function(data,status){
