@@ -1,6 +1,6 @@
 <template id="wang-editor">
     <div>
-        <div id="div1"></div>
+        <div :id="id"></div>
     </div>
 </template>
 <script type="text/javascript" src="/static/unpkg/wangEditor/wangEditor.min.js"></script>
@@ -9,7 +9,8 @@
     Vue.component('wang-editor', {
         template: '#wang-editor',
         props: {
-            value: null
+            value: null,
+            id: String
         },
         data: function () {
             return {
@@ -39,7 +40,7 @@
             loadEditor() {
                 const that = this
                 const E = window.wangEditor
-                const editor = new E("#div1")
+                const editor = new E("#" + that.id)
                 editor.config.onchange = function (newHtml) {
                     this.isChange = true;
                     that.changeContent(newHtml)
