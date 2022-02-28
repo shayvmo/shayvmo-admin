@@ -11,6 +11,7 @@ use App\Http\Requests\Backend\AdminPostRequest;
 use App\Models\Admin;
 use App\Models\Role;
 use App\Services\Base\CommonService;
+use Illuminate\Http\Request;
 
 class AdminController extends Controller
 {
@@ -65,6 +66,7 @@ class AdminController extends Controller
         $params['password'] = BackendConstant::DEFAULT_PASSWORD;
         $admin = Admin::query()->create($params);
         $params['roles'] && $admin->assignRole($params['roles']);
+        activity()->inLog('create')->performedOn($admin)->causedBy($request->user())->withProperties($params)->log('添加数据');
         return $this->successData($admin->toArray());
     }
 
@@ -90,36 +92,40 @@ class AdminController extends Controller
         }
         $admin->fill($params)->saveOrFail();
         $admin->syncRoles($params['roles']);
+        activity()->inLog('update')->performedOn($admin)->causedBy($adminPostRequest->user())->withProperties($params)->log('更新数据');
         return $this->success();
     }
 
 
-    public function destroy(Admin $admin)
+    public function destroy(Admin $admin, Request $request)
     {
         if ($admin->id === 1) {
             throw new ServiceException(SystemConstant::CANT_EDIT_SYSTEM_ITEM);
         }
         $admin->delete();
+        activity()->inLog('destroy')->performedOn($admin)->causedBy($request->user())->withProperties($admin->toArray())->log('删除数据');
         return $this->success();
     }
 
-    public function resetPwd(Admin $admin)
+    public function resetPwd(Admin $admin, Request $request)
     {
         if($admin->id === 1) {
             throw new ServiceException(SystemConstant::CANT_EDIT_SYSTEM_ITEM);
         }
         $admin->password = BackendConstant::DEFAULT_PASSWORD;
         $admin->save();
+        activity()->inLog('update')->performedOn($admin)->causedBy($request->user())->log('重置管理员密码');
         return $this->success();
     }
 
-    public function quickForbidden(Admin $admin)
+    public function quickForbidden(Admin $admin, Request $request)
     {
         if($admin->id === 1) {
             throw new ServiceException(SystemConstant::CANT_EDIT_SYSTEM_ITEM);
         }
         $admin->status = !$admin->status;
         $admin->save();
+        activity()->inLog('update')->performedOn($admin)->causedBy($request->user())->withProperties(['status' => $admin->status])->log('快速更新管理员账号状态');
         return $this->success();
     }
 

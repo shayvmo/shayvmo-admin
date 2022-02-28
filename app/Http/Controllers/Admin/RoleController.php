@@ -58,6 +58,7 @@ class RoleController extends Controller
         CommonService::validate($params, $rules, ['name.unique' => '角色标识已存在']);
         $params['desc'] = $params['desc'] ?? '';
         $role = Role::query()->create($params);
+        activity()->inLog('store')->performedOn($role)->causedBy($request->user())->withProperties($params)->log('创建数据');
         return $this->successData($role->toArray());
     }
 
@@ -77,11 +78,12 @@ class RoleController extends Controller
         }
         $params['desc'] = $params['desc'] ?? '';
         $role->fill($params)->save();
+        activity()->inLog('update')->performedOn($role)->causedBy($request->user())->withProperties($params)->log('更新数据');
         return $this->successData($role->toArray());
     }
 
 
-    public function destroy(Role $role)
+    public function destroy(Role $role, Request $request)
     {
         if($role->id === 1) {
             throw new ServiceException(SystemConstant::CANT_EDIT_SYSTEM_ITEM);
@@ -91,7 +93,7 @@ class RoleController extends Controller
         } catch (QueryException $queryException) {
             throw new ServiceException(SystemConstant::DELETE_FAILED);
         }
-
+        activity()->inLog('destroy')->performedOn($role)->causedBy($request->user())->withProperties($role->toArray())->log('删除数据');
         return $this->success();
     }
 

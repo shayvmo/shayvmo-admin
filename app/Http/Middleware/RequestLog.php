@@ -34,6 +34,6 @@ class RequestLog
             'param' => $request->except(['_token','_method']),
             'method' => $request->method(),
         ];
-        \App\Services\Base\CommonService::addRequestLog($params);
+        \App\Services\Base\LogService::addRequestLog($params);
     }
 }

@@ -100,6 +100,9 @@ class AuthController extends Controller
         $user->last_login_ip = $request->ip();
         $user->last_login_at = mysql_timestamp();
         $user->save();
+        activity()->inLog('login')->performedOn($user)->causedBy($user)->withProperties([
+            'ip' => $request->ip()
+        ])->log('用户登录系统');
         // 暂时注释
         /*$user->notify(new AdminLogin([
             'avatar' => (new Avatar(config('laravolt.avatar')))->create($user->username)->toBase64(),
