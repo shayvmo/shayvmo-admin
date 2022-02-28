@@ -22,7 +22,8 @@ class BasicController extends Controller
 
     public function dateCenter()
     {
-        return View::make('admin.index');
+        $motto = get_motto();
+        return View::make('admin.index', compact('motto'));
     }
 
     //后台用户菜单

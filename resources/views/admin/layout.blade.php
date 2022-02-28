@@ -79,14 +79,14 @@
 		<script src="{{asset(BE_COMPONENT.'/pear/pear.js')}}"></script>
         <!-- 框 架 初 始 化 -->
 		<script>
-			layui.use(['admin','jquery','convert','popup','notice', 'layer'], function() {
+			layui.use(['admin','jquery', 'popup','notice'], function() {
                 const admin = layui.admin;
                 const $ = layui.jquery;
                 const popup = layui.popup;
                 const notice = layui.notice;
 
-                admin.setConfigType("yml");
-                admin.setConfigPath("{{asset(BE_CONFIG.'/pear.config.yml')}}");
+                admin.setConfigType("json");
+                admin.setConfigPath("{{asset(BE_CONFIG.'/pear.config.json')}}");
                 admin.render();
 
                 // 登出逻辑

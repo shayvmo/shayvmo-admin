@@ -101,7 +101,7 @@ php artisan rsap
   
 延后：
 - [ ] 上传设置优化，上传方式：本地，七牛云，阿里云
-- [ ] 引入[spatie/laravel-activitylog](https://spatie.be/docs/laravel-activitylog/v4/introduction)
+- [x] 引入[spatie/laravel-activitylog](https://spatie.be/docs/laravel-activitylog/v4/introduction)
 
 ---
 

@@ -9,7 +9,8 @@
 @section('content')
     <div id="app">
         <el-card class="box-card">
-            【 @{{ nowTime }} 】 生活就像海洋，只有意志坚强的人才能到达彼岸。
+           <span>【 @{{ nowTime }} 】</span>
+           <span> {{ $motto }} </span>
         </el-card>
         <el-row :gutter="20" class="margin-top-bottom-10">
             <el-col :span="12">
@@ -18,14 +19,9 @@
                         <span>更新动态</span>
                     </div>
                     <el-timeline>
-                        <el-timeline-item timestamp="2022-02-25" placement="top">
+                        <el-timeline-item v-for="item, key in timeLine" :key="key" :timestamp="item.time">
                             <el-card>
-                                <h4>删除生成头像composer包；去掉消息组件等</h4>
-                            </el-card>
-                        </el-timeline-item>
-                        <el-timeline-item timestamp="2022-01-25" placement="top">
-                            <el-card>
-                                <h4>仪表盘更新, 添加更新日志以及仓库地址</h4>
+                                <h4>@{{ item.content }}</h4>
                             </el-card>
                         </el-timeline-item>
                     </el-timeline>
@@ -53,7 +49,21 @@
         const app = new Vue({
             el: '#app',
             data: {
-                nowTime: ''
+                nowTime: '',
+                timeLine: [
+                    {
+                        time: '2022-02-28',
+                        content: '微调；首页增加motto随机展示',
+                    },
+                    {
+                        time: '2022-02-25',
+                        content: '删除生成头像composer包；去掉消息组件等',
+                    },
+                    {
+                        time: '2022-01-25',
+                        content: '仪表盘更新, 添加更新日志以及仓库地址',
+                    },
+                ],
             },
             created() {
 
