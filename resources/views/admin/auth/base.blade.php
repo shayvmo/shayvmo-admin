@@ -3,7 +3,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>[{{config('frontend.site_title')}}] 登录</title>
+    <title> 后台管理系统 </title>
     <meta name="renderer" content="webkit">
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=0">
@@ -12,13 +12,13 @@
     <link rel="stylesheet" href="{{asset(BE_ADMIN.'/css/other/login.css')}}" />
     @yield('style')
 </head>
-<body background="{{config('frontend.login_background')}}" style="background-size: cover;">
+<body background="/static/admin/admin/images/background.svg" style="background-size: cover;">
     <form class="layui-form" action="javascript:void(0);">
         {{csrf_field()}}
         <div class="layui-form-item">
-            <img class="logo" src="{{config('frontend.site_logo')}}" />
-            <div class="title">{{config('frontend.site_name')}}</div>
-            <div class="desc">{{config('frontend.site_aword')}}</div>
+            <img class="logo" src="/static/admin/admin/images/logo.png" />
+            <div class="title">沙屿沫 Admin</div>
+            <div class="desc">总 有 人 山 高 路 远 为 你 而 来</div>
         </div>
         @yield('content')
     </form>

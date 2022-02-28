@@ -3,7 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-		<title> {{ config('frontend.site_title') }} </title>
+		<title> 后台管理系统 </title>
         <!-- 依 赖 样 式 -->
 		<link rel="stylesheet" href="{{asset(BE_COMPONENT.'/pear/css/pear.css')}}" />
         <!-- 加 载 样 式-->
