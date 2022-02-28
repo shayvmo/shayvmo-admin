@@ -42,10 +42,6 @@ composer install
 
 > 账号密码：admin 123456
 
-> 注意：开源demo每天会定时运行脚本重置数据库。
-
-demo地址：[https://demo.shayvmo.cn](https://demo.shayvmo.cn) 
-
 【注】
 
 1、本地开发部署时，安装成功后，可以直接登录访问后台，默认 admin 123456
