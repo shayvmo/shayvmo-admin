@@ -25,7 +25,7 @@
     <div id="app">
         <div class="margin-top-bottom-10">
             <el-card>
-                权限列表
+                权限列表 <span style="color: red">【建议仅限开发者操作】</span>
             </el-card>
         </div>
         <div class="custom-tree-container">

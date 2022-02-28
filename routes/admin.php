@@ -34,6 +34,7 @@ Route::group(['middleware' => ['check.install']], function() {
         Route::get('/menu','BasicController@menu')->name('admin.menu');//后台菜单
         Route::get('/','BasicController@layout')->name('admin.layout');// 后台布局
         Route::get('/index','BasicController@dateCenter')->name('admin.index');// 后台首页
+        Route::get('/motto','BasicController@getMotto')->name('admin.motto');// 后台首页格言
         Route::get('/profile','BasicController@profile')->name('admin.profile');// 基础资料
         Route::get('/pwdPage','BasicController@pwdPage')->name('admin.password');// 更改密码页
         Route::post('/updatePwd','BasicController@updatePwd')->name('admin.password.update')->middleware('request.log');// 更新密码api

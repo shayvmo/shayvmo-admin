@@ -7,6 +7,8 @@ use App\Constants\SystemConstant;
 use App\Exceptions\ServiceException;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Backend\ChangePasswordRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
@@ -20,10 +22,58 @@ class BasicController extends Controller
         return View::make('admin.layout',compact('guard'));
     }
 
-    public function dateCenter()
+    public function dateCenter(Request $request)
     {
         $motto = get_motto();
-        return View::make('admin.index', compact('motto'));
+        $system_info = [
+            [
+                'key' => '操作系统',
+                'value' => PHP_OS,
+            ],
+            [
+                'key' => '剩余空间',
+                'value' => human_filesize(disk_free_space('.')),
+            ],
+            [
+                'key' => '当前设置域名',
+                'value' => config('app.url'),
+            ],
+            [
+                'key' => '运行环境',
+                'value' => $request->server('SERVER_SOFTWARE'),
+            ],
+            [
+                'key' => 'PHP版本',
+                'value' => PHP_VERSION,
+            ],
+            [
+                'key' => 'PHP运行方式',
+                'value' => php_sapi_name(),
+            ],
+            [
+                'key' => 'Mysql数据库版本',
+                'value' => function_exists('mysql_get_server_info')?mysql_get_server_info():DB::select('SELECT VERSION() as mysql_version')[0]->mysql_version,
+            ],
+            [
+                'key' => 'Laravel版本',
+                'value' => app()::VERSION,
+            ],
+            [
+                'key' => '上传附件限制',
+                'value' => ini_get('upload_max_filesize'),
+            ],
+            [
+                'key' => '执行时间限制',
+                'value' => ini_get('max_execution_time').'秒',
+            ],
+        ];
+        return View::make('admin.index', compact('motto', 'system_info'));
+    }
+
+    public function getMotto()
+    {
+        $motto = get_motto();
+        return $this->successData(compact('motto'));
     }
 
     //后台用户菜单
