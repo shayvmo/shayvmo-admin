@@ -15,7 +15,7 @@
         </div>
 
         <div class="box-card margin-top-bottom-10">
-            <el-card class="box-card">
+            <el-card >
                 <el-form :inline="true" :model="searchData" class="demo-form-inline">
                     <el-form-item label="关键词">
                         <el-input
@@ -27,31 +27,15 @@
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" @click="getList" >查询</el-button>
+                        <el-button @click="dialogShow()">添加</el-button>
                     </el-form-item>
                 </el-form>
-            </el-card>
-        </div>
-
-        <div class="box-card margin-top-bottom-10">
-            <el-card >
-                <div slot="header" class="clearfix">
-                    <span>数据列表</span>
-                    <div style="float: right">
-                        <el-button size="small" @click="dialogShow()">添加</el-button>
-                        <el-button size="small" type="danger" @click="handleBatchDelete()">批量删除</el-button>
-                    </div>
-                </div>
                 <el-table
                     v-loading="listLoading"
-                    ref="multipleTable"
                     :data="tableData"
                     tooltip-effect="dark"
                     style="width: 100%"
-                    @selection-change="handleSelectionChange">
-                    <el-table-column
-                        type="selection"
-                        width="55">
-                    </el-table-column>
+                >
                     <el-table-column
                         prop="id"
                         label="ID"
@@ -76,20 +60,30 @@
                     >
                         <template slot-scope="scope">
                             <div v-if="scope.row.id > 1">
-                                <el-button
-                                    type="primary"
-                                    size="mini"
-                                    @click="permissionsDialogShow(scope.row)"
-                                >菜单权限</el-button>
-                                <el-button
-                                    size="mini"
-                                    @click="dialogShow(scope.row)"
-                                >编辑</el-button>
-                                <el-button
-                                    size="mini"
-                                    type="danger"
-                                    @click="handleDelete(scope.$index, scope.row)"
-                                >删除</el-button>
+
+                                @can('system.role.permission')
+                                    <el-button
+                                        type="primary"
+                                        size="mini"
+                                        @click="permissionsDialogShow(scope.row)"
+                                    >菜单权限</el-button>
+                                @endcan
+
+                                @can('system.role.edit')
+                                    <el-button
+                                        size="mini"
+                                        @click="dialogShow(scope.row)"
+                                    >编辑</el-button>
+                                @endcan
+
+                                @can('system.role.destroy')
+                                    <el-button
+                                        size="mini"
+                                        type="danger"
+                                        @click="handleDelete(scope.$index, scope.row)"
+                                    >删除</el-button>
+                                @endcan
+
                             </div>
                         </template>
 
@@ -208,7 +202,6 @@
                     page: 1,
                 },
                 tableData: [],
-                multipleSelection: [],
 
 
                 dialogFormVisible: false,
@@ -263,9 +256,6 @@
                     this.searchData.page = currentPage;
                     this.getList();
                 },
-                handleSelectionChange(val) {
-                    this.multipleSelection = val;
-                },
                 refreshList() {
                     this.searchData.page = 1;
                     this.getList();
@@ -304,7 +294,6 @@
                     this.dialogFormVisible = true;
                 },
                 handleAdd() {
-                    console.log('添加管理员', this.formData)
                     this.formSubmitLoading = true
                     let that = this
                     myRequest({
@@ -331,7 +320,6 @@
                     })
                 },
                 handleEdit(id) {
-                    console.log('编辑管理员：' + id)
                     this.formSubmitLoading = true
                     let that = this;
                     myRequest({
@@ -356,17 +344,6 @@
                     }).catch(() => {
                         this.formSubmitLoading = false
                     })
-                },
-                handleBatchDelete() {
-                    let ids = this.multipleSelection.map(function (item, index) {
-                        return item.id
-                    })
-                    console.log('批量删除：' + ids)
-                    this.$notify({
-                        title: '注意',
-                        message: '功能开发中',
-                        type: 'warning'
-                    });
                 },
                 // 删除
                 handleDelete(index, row) {
@@ -430,7 +407,6 @@
                     this.dialogPermissionsVisible = true;
                 },
                 getPermissions() {
-                    console.log('getPermissions', this.permissionDialog.row)
                     myRequest({
                         url: GET_PERMISSIONS_URL.replace('0', this.permissionDialog.row.id),
                         type: "get"

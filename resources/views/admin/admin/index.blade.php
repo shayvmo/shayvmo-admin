@@ -23,7 +23,7 @@
         </div>
 
         <div class="box-card margin-top-bottom-10">
-            <el-card class="box-card">
+            <el-card >
                 <el-form :inline="true" :model="searchData" class="demo-form-inline">
                     <el-form-item label="关键词">
                         <el-input
@@ -35,31 +35,15 @@
                     </el-form-item>
                     <el-form-item>
                         <el-button type="primary" @click="getList" >查询</el-button>
+                        <el-button @click="dialogShow()">添加</el-button>
                     </el-form-item>
                 </el-form>
-            </el-card>
-        </div>
-
-        <div class="box-card margin-top-bottom-10">
-            <el-card >
-                <div slot="header" class="clearfix">
-                    <span>数据列表</span>
-                    <div style="float: right">
-                        <el-button size="small" @click="dialogShow()">添加</el-button>
-                        <el-button size="small" type="danger" @click="handleBatchDelete()">批量删除</el-button>
-                    </div>
-                </div>
                 <el-table
                     v-loading="listLoading"
-                    ref="multipleTable"
                     :data="tableData"
                     tooltip-effect="dark"
                     style="width: 100%"
-                    @selection-change="handleSelectionChange">
-                    <el-table-column
-                        type="selection"
-                        width="55">
-                    </el-table-column>
+                >
                     <el-table-column
                         prop="id"
                         label="ID"
@@ -224,7 +208,6 @@
                     page: 1,
                 },
                 tableData: [],
-                multipleSelection: [],
 
 
                 dialogFormVisible: false,
@@ -256,9 +239,6 @@
                 pagination(currentPage) {
                     this.searchData.page = currentPage;
                     this.getList();
-                },
-                handleSelectionChange(val) {
-                    this.multipleSelection = val;
                 },
                 refreshList() {
                     this.searchData.page = 1;
@@ -357,17 +337,6 @@
                     }).catch(() => {
                         this.formSubmitLoading = false
                     })
-                },
-                handleBatchDelete() {
-                    let ids = this.multipleSelection.map(function (item, index) {
-                        return item.id
-                    })
-                    console.log('批量删除：' + ids)
-                    this.$notify({
-                        title: '注意',
-                        message: '功能开发中',
-                        type: 'warning'
-                    });
                 },
                 // 删除
                 handleDelete(index, row) {
