@@ -105,13 +105,14 @@
                                           placeholder="请输入分类名称搜索"></el-input>
                                 <el-menu class="group-menu"
                                          mode="vertical"
+                                         :default-active="groupActive"
                                          v-loading="groupListLoading">
-                                    <el-menu-item index="all" @click="switchGroup(-1)">
+                                    <el-menu-item index="-1" @click="switchGroup(-1)">
                                         <i class="el-icon-tickets"></i>
                                         <span>全部</span>
                                     </el-menu-item>
                                     <template v-for="(item, index) in groupItem">
-                                        <el-menu-item :index="'' + index" @click="switchGroup(index)">
+                                        <el-menu-item :index="'' + item.id" @click="switchGroup(index)">
                                             <div style="display: flex; justify-content: space-between">
                                                 <div style="overflow: hidden;text-overflow: ellipsis">
                                                     <i class="el-icon-tickets"></i>
@@ -353,6 +354,7 @@
                 groupList: [],
                 groupItem: [],
                 groupListLoading: false,
+                groupActive: '-1',
                 groupForm: {
                     id: null,
                     name: '',
@@ -579,6 +581,7 @@
                     attachment_group_id: index > -1 ? this.groupItem[index].id : null,
                 };
                 this.currentAttachmentGroupId = index > -1 ? this.groupItem[index].id : null;
+                this.groupActive = index > -1 ? this.groupItem[index].id.toString() : '-1';
                 this.loadList();
             },
             loadList() {
