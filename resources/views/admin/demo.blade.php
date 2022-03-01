@@ -76,6 +76,7 @@
                     </el-form-item>
                     <el-form-item label="活动规则">
                         <wang-editor
+                            :id="editor"
                             v-model="formData.content"
                         ></wang-editor>
                     </el-form-item>
@@ -113,6 +114,7 @@
             el: '#app',
             data: {
                 simple: false,
+                editor: 'div1',
                 formData: {
                     name: '活动名称',
                     content: '<p>组件参数传递2</p>',
